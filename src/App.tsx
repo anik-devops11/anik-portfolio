@@ -427,66 +427,122 @@ function App() {
 
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-[#34353a]">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-cyan-400">Get in Touch</h2>
-          <div className="max-w-lg mx-auto">
-            <p className="text-center text-gray-400 mb-8">
-              Feel free to reach out for collaborations or queries
-            </p>
-            <form
-  action="https://formspree.io/f/xovwjzed"
-  method="POST"
-  className="space-y-6"
->
-  {/* ✅ Honeypot field to block spam bots */}
-  <input type="text" name="_gotcha" style={{ display: 'none' }} />
+      import React, { useState } from "react";
+      import { User, Mail, MessageSquare, Send } from "react-feather"; // icons you used
 
-  <div className="relative">
-    <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-    <input
-      type="text"
-      name="name"
-      required
-      placeholder="Your Name"
-      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-    />
-  </div>
+      export default function ContactSection() {
+        const [formStatus, setFormStatus] = useState("");
+        const [formData, setFormData] = useState({
+          name: "",
+          email: "",
+          message: "",
+          _gotcha: "",
+        });
 
-  <div className="relative">
-    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-    <input
-      type="email"
-      name="email"
-      required
-      placeholder="Your Email"
-      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-    />
-  </div>
+        const handleChange = (e) => {
+          setFormData({...formData, [e.target.name]: e.target.value });
+        };
 
-  <div className="relative">
-    <MessageSquare className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
-    <textarea
-      name="message"
-      required
-      placeholder="Your Message"
-      rows={4}
-      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-    ></textarea>
-  </div>
+        const handleSubmit = async (e) => {
+          e.preventDefault();
 
-  <button
-    type="submit"
-    className="flex items-center justify-center mx-auto gap-2 w-60 bg-cyan-400 hover:bg-cyan-500 text-[#2a2d3a] font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 group"
-  >
-    <span>Send Message</span>
-    <Send className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-  </button>
-</form>
+          // Block spam bots filling honeypot
+          if (formData._gotcha) return;
 
-          </div>
-        </div>
-      </section>
+          try {
+            const response = await fetch("https://formspree.io/f/xovwjzed", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+              setFormStatus("Thanks for your message! I'll get back to you soon.");
+              setFormData({ name: "", email: "", message: "", _gotcha: "" });
+            } else {
+              setFormStatus("Oops! Something went wrong. Please try again.");
+            }
+          } catch (error) {
+            setFormStatus("Error sending message. Please try again later.");
+          }
+        };
+
+        return (
+          <section id="contact" className="py-20 bg-[#34353a]">
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl font-bold mb-12 text-cyan-400">Get in Touch</h2>
+              <div className="max-w-lg mx-auto">
+                <p className="text-center text-gray-400 mb-8">
+                  Feel free to reach out for collaborations or queries
+                </p>
+                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                  <input
+                    type="text"
+                    name="_gotcha"
+                    style={{ display: "none" }}
+                    value={formData._gotcha}
+                    onChange={handleChange}
+                  />
+
+                  <div className="relative">
+                    <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="Your Name"
+                      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="Your Email"
+                      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <MessageSquare className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
+                    <textarea
+                      name="message"
+                      required
+                      placeholder="Your Message"
+                      rows={4}
+                      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                      value={formData.message}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="flex items-center justify-center mx-auto gap-2 w-60 bg-cyan-400 hover:bg-cyan-500 text-[#2a2d3a] font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 group"
+                  >
+                    <span>Send Message</span>
+                    <Send className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  </button>
+                </form>
+
+                {formStatus && (
+                  <p className="mt-6 text-center text-cyan-400">{formStatus}</p>
+                )}
+              </div>
+            </div>
+          </section>
+        );
+      }
 
       {/* Resume Download Section */}
       <section className="py-12 bg-[#34353a] border-t border-gray-700">
