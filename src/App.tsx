@@ -252,7 +252,7 @@ function App() {
             <div className="mb-8 relative">
               <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-cyan-400/20 relative z-10">
                 <img
-                  src="./image/DP.png"
+                  src="DP.png"
                   alt="Anik Das"
                   className="w-full h-full object-cover"
                 />
