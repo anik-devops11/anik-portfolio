@@ -173,7 +173,7 @@ function App() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a 
-                href="https://drive.google.com/file/d/1WOgGh04G6_JcpYAuMPOZxfSEOBB448S9/view?usp=sharing"
+                href="https://drive.google.com/file/d/1iDOf3bZ7U6An9AhIGVjfR9fFdqjNwtPe/view?usp=drive_link"
                 download
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 text-cyan-400 hover:bg-cyan-400/20 transition-colors"
               >
@@ -492,7 +492,7 @@ function App() {
       <section className="py-12 bg-[#34353a] border-t border-gray-700">
         <div className="container mx-auto px-4 text-center">
           <a 
-            href="https://drive.google.com/file/d/1WOgGh04G6_JcpYAuMPOZxfSEOBB448S9/view?usp=sharing"
+            href="https://drive.google.com/file/d/1iDOf3bZ7U6An9AhIGVjfR9fFdqjNwtPe/view?usp=sharing"
             download
             className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-400 text-[#2a2d3a] rounded-lg hover:bg-cyan-500 transition-colors duration-300 font-semibold"
           >
