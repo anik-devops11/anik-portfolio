@@ -434,39 +434,56 @@ function App() {
             <p className="text-center text-gray-400 mb-8">
               Feel free to reach out for collaborations or queries
             </p>
-            <form className="space-y-6">
-              <div className="relative">
-                <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                />
-              </div>
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                />
-              </div>
-              <div className="relative">
-                <MessageSquare className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
-                <textarea
-                  placeholder="Your Message"
-                  rows={4}
-                  className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="flex items-center justify-center mx-auto gap-2 w-60 bg-cyan-400 hover:bg-cyan-500 text-[#2a2d3a] font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 group"
-              >
-                <span>Send Message</span>
-                <Send className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-              </button>
-            </form>
+            <form
+  action="https://formspree.io/f/xovwjzed"
+  method="POST"
+  className="space-y-6"
+>
+  {/* ✅ Honeypot field to block spam bots */}
+  <input type="text" name="_gotcha" style={{ display: 'none' }} />
+
+  <div className="relative">
+    <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+    <input
+      type="text"
+      name="name"
+      required
+      placeholder="Your Name"
+      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+    />
+  </div>
+
+  <div className="relative">
+    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="Your Email"
+      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+    />
+  </div>
+
+  <div className="relative">
+    <MessageSquare className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
+    <textarea
+      name="message"
+      required
+      placeholder="Your Message"
+      rows={4}
+      className="w-full bg-[#2a2d3a] rounded-lg py-3 px-12 text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    className="flex items-center justify-center mx-auto gap-2 w-60 bg-cyan-400 hover:bg-cyan-500 text-[#2a2d3a] font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 group"
+  >
+    <span>Send Message</span>
+    <Send className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+  </button>
+</form>
+
           </div>
         </div>
       </section>
@@ -487,7 +504,7 @@ function App() {
 
       {/* Footer */}
       <footer className="py-8 text-center text-gray-400 bg-[#34353a]">
-        <p>© {new Date().getFullYear()} Anik Das. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Anik Dash. All rights reserved.</p>
       </footer>
     </div>
   );
