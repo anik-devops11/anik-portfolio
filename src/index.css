@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav-link {
+  @apply text-gray-300 hover:text-cyan-400 transition-colors relative py-2;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.mobile-nav-link {
+  @apply text-gray-300 hover:text-cyan-400 transition-colors py-2 text-lg w-full text-left;
+}
+
+.social-link {
+  @apply text-gray-300 hover:text-cyan-400 transition-colors;
+}
+
+.particles {
+  @apply absolute w-full h-full overflow-hidden;
+}
+
+.particle {
+  @apply absolute rounded-full;
+  width: 2px;
+  height: 2px;
+  background-color: rgba(0, 230, 255, 0.5);
+  animation: float 8s infinite linear;
+}
+
+.particle:nth-child(even) {
+  width: 3px;
+  height: 3px;
+  animation-duration: 12s;
+}
+
+.particle:nth-child(3n) {
+  background-color: rgba(0, 230, 255, 0.3);
+  animation-duration: 15s;
+}
+
+.particle:nth-child(5n) {
+  width: 1px;
+  height: 1px;
+  animation-duration: 10s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx, 100vw), var(--ty, 100vh));
+    opacity: 0;
+  }
+}
+
+.particles .particle:nth-child(1) { --tx: 100vw; --ty: -50vh; left: 10%; top: 90%; }
+.particles .particle:nth-child(2) { --tx: -50vw; --ty: 100vh; left: 80%; top: 10%; }
+.particles .particle:nth-child(3) { --tx: 80vw; --ty: 80vh; left: 20%; top: 20%; }
+.particles .particle:nth-child(4) { --tx: -80vw; --ty: -80vh; left: 90%; top: 90%; }
+.particles .particle:nth-child(5) { --tx: 60vw; --ty: -60vh; left: 30%; top: 70%; }
+.particles .particle:nth-child(6) { --tx: -60vw; --ty: 60vh; left: 70%; top: 30%; }
+.particles .particle:nth-child(7) { --tx: 40vw; --ty: 40vh; left: 40%; top: 40%; }
+.particles .particle:nth-child(8) { --tx: -40vw; --ty: -40vh; left: 60%; top: 60%; }
+.particles .particle:nth-child(9) { --tx: 20vw; --ty: -20vh; left: 50%; top: 80%; }
+.particles .particle:nth-child(10) { --tx: -20vw; --ty: 20vh; left: 85%; top: 15%; }
+.particles .particle:nth-child(11) { --tx: 90vw; --ty: -90vh; left: 15%; top: 85%; }
+.particles .particle:nth-child(12) { --tx: -90vw; --ty: 90vh; left: 75%; top: 25%; }
+.particles .particle:nth-child(13) { --tx: 70vw; --ty: 70vh; left: 25%; top: 75%; }
+.particles .particle:nth-child(14) { --tx: -70vw; --ty: -70vh; left: 95%; top: 5%; }
+.particles .particle:nth-child(15) { --tx: 50vw; --ty: -50vh; left: 35%; top: 65%; }
+.particles .particle:nth-child(16) { --tx: -50vw; --ty: 50vh; left: 65%; top: 35%; }
+.particles .particle:nth-child(17) { --tx: 30vw; --ty: 30vh; left: 45%; top: 45%; }
+.particles .particle:nth-child(18) { --tx: -30vw; --ty: -30vh; left: 55%; top: 55%; }
+.particles .particle:nth-child(19) { --tx: 10vw; --ty: -10vh; left: 5%; top: 95%; }
+.particles .particle:nth-child(20) { --tx: -10vw; --ty: 10vh; left: 95%; top: 5%; }
+
+.animate-on-scroll {
+  @apply opacity-0 transform translate-y-10 transition-all duration-1000;
+}
+
+.animate-on-scroll.show {
+  @apply opacity-100 transform-none;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slower {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-spin-slower {
+  animation: spin-slower 20s linear infinite;
+}
+
+html {
+  @apply scroll-smooth;
+  scroll-padding-top: 5rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2a2d3a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #234668;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2d5a8b;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
