@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  Cloud, 
-  Container, 
-  GitBranch, 
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Cloud,
+  Container,
+  GitBranch,
   Monitor,
   Server,
   Settings,
@@ -17,8 +17,8 @@ import {
   User,
   MessageSquare,
   ChevronDown,
-  Send
-} from 'lucide-react';
+  Send,
+} from "lucide-react";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -38,8 +38,8 @@ function App() {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -54,12 +54,12 @@ function App() {
       setIsMouseMoving(false);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseout', handleMouseLeave);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseout', handleMouseLeave);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseout", handleMouseLeave);
       clearTimeout(mouseTimeout);
     };
   }, []);
@@ -67,20 +67,22 @@ function App() {
   useEffect(() => {
     if (cursorRef.current) {
       cursorRef.current.style.transform = `translate(${mousePosition.x}px, ${mousePosition.y}px)`;
-      cursorRef.current.style.opacity = isMouseMoving ? '1' : '0';
+      cursorRef.current.style.opacity = isMouseMoving ? "1" : "0";
     }
   }, [mousePosition, isMouseMoving]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+          entry.target.classList.add("show");
         }
       });
     });
 
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+    document
+      .querySelectorAll(".animate-on-scroll")
+      .forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
@@ -88,75 +90,113 @@ function App() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsOpen(false);
     }
   };
 
   const skills = [
-    { name: 'AWS', icon: <Cloud className="w-8 h-8" />, level: 90 },
-    { name: 'Kubernetes', icon: <Container className="w-8 h-8" />, level: 85 },
-    { name: 'Docker', icon: <Container className="w-8 h-8" />, level: 95 },
-    { name: 'CI/CD', icon: <GitBranch className="w-8 h-8" />, level: 88 },
-    { name: 'Monitoring', icon: <Monitor className="w-8 h-8" />, level: 82 },
-    { name: 'Infrastructure', icon: <Server className="w-8 h-8" />, level: 87 }
+    { name: "AWS", icon: <Cloud className="w-8 h-8" />, level: 90 },
+    { name: "Kubernetes", icon: <Container className="w-8 h-8" />, level: 85 },
+    { name: "Docker", icon: <Container className="w-8 h-8" />, level: 95 },
+    { name: "CI/CD", icon: <GitBranch className="w-8 h-8" />, level: 88 },
+    { name: "Monitoring", icon: <Monitor className="w-8 h-8" />, level: 82 },
+    { name: "Infrastructure", icon: <Server className="w-8 h-8" />, level: 87 },
   ];
 
   const projects = [
     {
-      title: 'Enterprise Kubernetes Cluster',
-      description: 'Designed and implemented a highly available Kubernetes cluster on AWS EKS, supporting 100+ microservices with automated scaling and monitoring.',
-      tech: ['AWS EKS', 'Terraform', 'Prometheus', 'Grafana']
+      title: "Enterprise Kubernetes Cluster",
+      description:
+        "Designed and implemented a highly available Kubernetes cluster on AWS EKS, supporting 100+ microservices with automated scaling and monitoring.",
+      tech: ["AWS EKS", "Terraform", "Prometheus", "Grafana"],
     },
     {
-      title: 'CI/CD Pipeline Automation',
-      description: 'Built a comprehensive CI/CD pipeline using Jenkins and GitHub Actions, reducing deployment time by 70% and improving code quality through automated testing.',
-      tech: ['Jenkins', 'GitHub Actions', 'Docker', 'SonarQube']
+      title: "CI/CD Pipeline Automation",
+      description:
+        "Built a comprehensive CI/CD pipeline using Jenkins and GitHub Actions, reducing deployment time by 70% and improving code quality through automated testing.",
+      tech: ["Jenkins", "GitHub Actions", "Docker", "SonarQube"],
     },
     {
-      title: 'Cloud Cost Optimization',
-      description: 'Implemented AWS cost optimization strategies resulting in 40% reduction in cloud infrastructure costs while maintaining performance.',
-      tech: ['AWS', 'Terraform', 'CloudWatch', 'Cost Explorer']
-    }
+      title: "Cloud Cost Optimization",
+      description:
+        "Implemented AWS cost optimization strategies resulting in 40% reduction in cloud infrastructure costs while maintaining performance.",
+      tech: ["AWS", "Terraform", "CloudWatch", "Cost Explorer"],
+    },
   ];
 
   return (
     <div className="bg-[#2a2d3a] text-gray-300 min-h-screen relative">
       {/* Custom Cursor */}
-      <div 
+      <div
         ref={cursorRef}
         className="fixed w-8 h-8 bg-yellow-400/20 rounded-full pointer-events-none z-50 transition-opacity duration-300"
-        style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }}
+        style={{
+          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+        }}
       />
 
       {/* Navbar */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 rounded-b-lg ${
-        isScrolled 
-          ? 'bg-gradient-to-r from-[#2a2d3a]/90 via-[#34353a]/90 to-[#2a2d3a]/90 backdrop-blur-sm shadow-lg' 
-          : 'bg-transparent'
-      }`}>
+      <nav
+        className={`fixed w-full z-50 transition-all duration-300 rounded-b-lg ${
+          isScrolled
+            ? "bg-gradient-to-r from-[#2a2d3a]/90 via-[#34353a]/90 to-[#2a2d3a]/90 backdrop-blur-sm shadow-lg"
+            : "bg-transparent"
+        }`}
+      >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex-shrink-0">
               <span className="text-xl font-semibold text-cyan-400">
-                Anik Dash <span className="text-gray-400">|</span> <span className="text-sm font-normal">DevOps Engineer</span>
+                Anik Dash <span className="text-gray-400">|</span>{" "}
+                <span className="text-sm font-normal">DevOps Engineer</span>
               </span>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('home')} className="nav-link">Home</button>
-              <button onClick={() => scrollToSection('about')} className="nav-link">About</button>
-              <button onClick={() => scrollToSection('skills')} className="nav-link">Skills</button>
-              <button onClick={() => scrollToSection('projects')} className="nav-link">Projects</button>
-              <button onClick={() => scrollToSection('certifications')} className="nav-link">Certifications</button>
-              <button onClick={() => scrollToSection('contact')} className="nav-link">Contact</button>
+              <button
+                onClick={() => scrollToSection("home")}
+                className="nav-link"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollToSection("about")}
+                className="nav-link"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection("skills")}
+                className="nav-link"
+              >
+                Skills
+              </button>
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="nav-link"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => scrollToSection("certifications")}
+                className="nav-link"
+              >
+                Certifications
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="nav-link"
+              >
+                Contact
+              </button>
             </div>
 
             {/* Social Links */}
             <div className="hidden md:flex items-center space-x-4">
-              <a 
+              <a
                 href="https://github.com/anik-devops11"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -164,7 +204,7 @@ function App() {
               >
                 <Github className="w-5 h-5" />
               </a>
-              <a 
+              <a
                 href="https://www.linkedin.com/in/anik-das12/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -172,7 +212,7 @@ function App() {
               >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a 
+              <a
                 href="https://drive.google.com/file/d/1iDOf3bZ7U6An9AhIGVjfR9fFdqjNwtPe/view?usp=drive_link"
                 download
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 text-cyan-400 hover:bg-cyan-400/20 transition-colors"
@@ -188,25 +228,63 @@ function App() {
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gray-300 hover:text-cyan-400 transition-colors"
               >
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </button>
             </div>
           </div>
 
           {/* Mobile Navigation */}
-          <div className={`md:hidden transition-all duration-300 ease-in-out ${
-            isOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0 overflow-hidden'
-          }`}>
+          <div
+            className={`md:hidden transition-all duration-300 ease-in-out ${
+              isOpen
+                ? "max-h-screen opacity-100 py-4"
+                : "max-h-0 opacity-0 overflow-hidden"
+            }`}
+          >
             <div className="flex flex-col space-y-4">
-              <button onClick={() => scrollToSection('home')} className="mobile-nav-link">Home</button>
-              <button onClick={() => scrollToSection('about')} className="mobile-nav-link">About</button>
-              <button onClick={() => scrollToSection('skills')} className="mobile-nav-link">Skills</button>
-              <button onClick={() => scrollToSection('projects')} className="mobile-nav-link">Projects</button>
-              <button onClick={() => scrollToSection('certifications')} className="mobile-nav-link">Certifications</button>
-              <button onClick={() => scrollToSection('contact')} className="mobile-nav-link">Contact</button>
-              
+              <button
+                onClick={() => scrollToSection("home")}
+                className="mobile-nav-link"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollToSection("about")}
+                className="mobile-nav-link"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection("skills")}
+                className="mobile-nav-link"
+              >
+                Skills
+              </button>
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="mobile-nav-link"
+              >
+                Projects
+              </button>
+              <button
+                onClick={() => scrollToSection("certifications")}
+                className="mobile-nav-link"
+              >
+                Certifications
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="mobile-nav-link"
+              >
+                Contact
+              </button>
+
               <div className="flex items-center space-x-4 pt-4 border-t border-gray-700">
-                <a 
+                <a
                   href="https://github.com/anik-devops11"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -214,7 +292,7 @@ function App() {
                 >
                   <Github className="w-5 h-5" />
                 </a>
-                <a 
+                <a
                   href="https://www.linkedin.com/in/anik-das12/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -222,7 +300,7 @@ function App() {
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a 
+                <a
                   href="/resume.pdf"
                   download
                   className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 text-cyan-400 hover:bg-cyan-400/20 transition-colors"
@@ -237,7 +315,10 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section
+        id="home"
+        className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      >
         <div className="absolute inset-0 bg-gradient-to-br from-[#2a2d3a] to-[#1a1d2a] z-0">
           {/* Animated particles */}
           <div className="particles">
@@ -264,12 +345,15 @@ function App() {
             {/* Name and Title */}
             <div className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000">
               <h1 className="text-5xl md:text-7xl font-bold mb-4">
-                <span className="text-cyan-400">Anik</span>{' '}
+                <span className="text-cyan-400">Anik</span>{" "}
                 <span className="text-white">Dash</span>
               </h1>
-              <h2 className="text-2xl md:text-4xl mb-8 text-gray-300">DevOps Engineer & Cloud Architect</h2>
+              <h2 className="text-2xl md:text-4xl mb-8 text-gray-300">
+                DevOps Engineer & Cloud Architect
+              </h2>
               <p className="text-xl max-w-2xl mx-auto text-gray-400">
-                Transforming development workflows and infrastructure management through automation and cloud-native solutions.
+                Transforming development workflows and infrastructure management
+                through automation and cloud-native solutions.
               </p>
             </div>
 
@@ -288,17 +372,37 @@ function App() {
           <div className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000">
             <div className="max-w-3xl mx-auto">
               <p className="text-lg mb-6">
-                Aspiring DevOps Engineer with a passion for cloud technologies and automation. Currently enhancing my skills in AWS, Linux, GitHub, Kubernetes, and Jenkins to build a solid foundation in DevOps practices. My goal is to secure a role in the DevOps field where I can leverage my knowledge and passion for continuous improvement. I am always looking for opportunities to learn and grow in the field of DevOps.
+                Certified AWS Solutions Architect - Associate with a strong
+                passion for cloud technologies, automation, and DevOps
+                practices. I’m currently deepening my expertise in Kubernetes,
+                Docker, Jenkins, and CI/CD pipelines to strengthen my
+                capabilities as a DevOps Engineer. My focus is on building
+                reliable solutions that ensure performance, scalability, and
+                operational excellence. My goal is to contribute to innovative
+                teams where I can apply my skills, grow continuously, and help
+                drive operational excellence.
               </p>
               <p className="text-lg mb-8">
-                I'm passionate about implementing Infrastructure as Code, maintaining high availability systems, 
-                and creating robust monitoring solutions that ensure optimal performance and reliability.
+                I'm passionate about implementing Infrastructure as Code,
+                maintaining high availability systems, and creating robust
+                monitoring solutions that ensure optimal performance and
+                reliability.
               </p>
               <div className="flex justify-center space-x-6">
-                <a href="https://github.com/anik-devops11" target="_blank" rel="noopener noreferrer" className="social-link">
+                <a
+                  href="https://github.com/anik-devops11"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                >
                   <Github className="w-8 h-8" />
                 </a>
-                <a href="https://www.linkedin.com/in/anik-das12/" target="_blank" rel="noopener noreferrer" className="social-link">
+                <a
+                  href="https://www.linkedin.com/in/anik-das12/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                >
                   <Linkedin className="w-8 h-8" />
                 </a>
               </div>
@@ -311,12 +415,12 @@ function App() {
       <section id="skills" className="py-20 bg-[#34353a]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-cyan-400 hover:scale-105 transition-transform duration-300 inline-block">
-            Senior DevOps Engineer
+            DevOps Toolbox
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {skills.map((skill, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000"
               >
                 <div className="bg-[#2a2d3a] p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#2f3241] group">
@@ -324,12 +428,18 @@ function App() {
                     <div className="group-hover:scale-110 transition-transform duration-300">
                       {skill.icon}
                     </div>
-                    <span className="text-xl font-semibold text-cyan-400 group-hover:text-cyan-300">{skill.name}</span>
+                    <span className="text-xl font-semibold text-cyan-400 group-hover:text-cyan-300">
+                      {skill.name}
+                    </span>
                   </div>
                   <div className="w-full bg-gray-700 rounded-full h-2.5 mt-4 overflow-hidden">
-                    <div 
+                    <div
                       className="bg-cyan-400 h-2.5 rounded-full group-hover:bg-cyan-300 transition-all duration-500 ease-out"
-                      style={{ width: `${skill.level}%`, transform: 'translateX(-100%)', animation: 'slideRight 1s forwards' }}
+                      style={{
+                        width: `${skill.level}%`,
+                        transform: "translateX(-100%)",
+                        animation: "slideRight 1s forwards",
+                      }}
                     />
                   </div>
                 </div>
@@ -347,17 +457,21 @@ function App() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000"
               >
                 <div className="bg-[#2a2d3a] p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#2f3241] group">
-                  <h3 className="text-xl font-semibold mb-4 text-cyan-400 group-hover:text-cyan-300">{project.title}</h3>
-                  <p className="text-gray-400 mb-4 group-hover:text-gray-300">{project.description}</p>
+                  <h3 className="text-xl font-semibold mb-4 text-cyan-400 group-hover:text-cyan-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 mb-4 group-hover:text-gray-300">
+                    {project.description}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, techIndex) => (
-                      <span 
-                        key={techIndex} 
+                      <span
+                        key={techIndex}
                         className="px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded-full text-sm group-hover:bg-cyan-400/20 group-hover:text-cyan-300 transition-colors duration-300"
                       >
                         {tech}
@@ -374,62 +488,94 @@ function App() {
       {/* Certifications Section */}
       <section id="certifications" className="py-20 bg-[#34353a]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-cyan-400">Certifications</h2>
+          <h2 className="text-3xl font-bold mb-12 text-cyan-400">
+            Certifications
+          </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000">
               <div className="bg-[#2a2d3a] p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#2f3241]">
-                <h3 
+                <h3
                   className="text-xl font-semibold mb-4 text-cyan-400 cursor-pointer"
-                  onClick={() => window.open("https://www.credly.com/earner/earned/badge/83248789-17da-42ac-b78c-983f74cefba9", "_blank")}
+                  onClick={() =>
+                    window.open(
+                      "https://www.credly.com/earner/earned/badge/83248789-17da-42ac-b78c-983f74cefba9",
+                      "_blank"
+                    )
+                  }
                 >
                   AWS Certified Solutions Architect – Associate
                 </h3>
-                <p className="text-gray-400 mb-4">Earners of this certification have a comprehensive understanding of AWS services and technologies.</p>
+                <p className="text-gray-400 mb-4">
+                  Earners of this certification have a comprehensive
+                  understanding of AWS services and technologies.
+                </p>
               </div>
             </div>
             <div className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000">
               <div className="bg-[#2a2d3a] p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#2f3241]">
-                <h3 
+                <h3
                   className="text-xl font-semibold mb-4 text-cyan-400 cursor-pointer"
-                  onClick={() => window.open("https://learn.kodekloud.com/user/certificate/6756b7f6-451a-4bc8-8d7b-d66d59fa429b", "_blank")}
+                  onClick={() =>
+                    window.open(
+                      "https://learn.kodekloud.com/user/certificate/6756b7f6-451a-4bc8-8d7b-d66d59fa429b",
+                      "_blank"
+                    )
+                  }
                 >
                   GitHub Actions Certification
                 </h3>
-                <p className="text-gray-400 mb-4">Validates skills in automating workflows using GitHub Actions.</p>
+                <p className="text-gray-400 mb-4">
+                  Validates skills in automating workflows using GitHub Actions.
+                </p>
               </div>
             </div>
             <div className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000">
               <div className="bg-[#2a2d3a] p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#2f3241]">
-                <h3 
+                <h3
                   className="text-xl font-semibold mb-4 text-cyan-400 cursor-pointer"
-                  onClick={() => window.open("https://learn.kodekloud.com/user/certificate/1ac0bcee-e356-49ee-b45b-9497e5ed513f", "_blank")}
+                  onClick={() =>
+                    window.open(
+                      "https://learn.kodekloud.com/user/certificate/1ac0bcee-e356-49ee-b45b-9497e5ed513f",
+                      "_blank"
+                    )
+                  }
                 >
                   Docker Certified Associate Exam Course
                 </h3>
-                <p className="text-gray-400 mb-4">Proves proficiency in using Docker for containerization.</p>
+                <p className="text-gray-400 mb-4">
+                  Proves proficiency in using Docker for containerization.
+                </p>
               </div>
             </div>
             <div className="animate-on-scroll opacity-0 transform translate-y-10 transition-all duration-1000">
               <div className="bg-[#2a2d3a] p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#2f3241]">
-                <h3 
+                <h3
                   className="text-xl font-semibold mb-4 text-cyan-400 cursor-pointer"
-                  onClick={() => window.open("https://learn.kodekloud.com/user/certificate/896192db-d874-4e8c-b718-03984b53cf5c", "_blank")}
+                  onClick={() =>
+                    window.open(
+                      "https://learn.kodekloud.com/user/certificate/896192db-d874-4e8c-b718-03984b53cf5c",
+                      "_blank"
+                    )
+                  }
                 >
                   Jenkins For Beginners
                 </h3>
-                <p className="text-gray-400 mb-4">Demonstrates knowledge of Jenkins for continuous integration and delivery.</p>
+                <p className="text-gray-400 mb-4">
+                  Demonstrates knowledge of Jenkins for continuous integration
+                  and delivery.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-
-
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-[#34353a]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-cyan-400">Get in Touch</h2>
+          <h2 className="text-3xl font-bold mb-12 text-cyan-400">
+            Get in Touch
+          </h2>
           <div className="max-w-lg mx-auto">
             <p className="text-center text-gray-400 mb-8">
               Feel free to reach out for collaborations or queries
@@ -440,7 +586,7 @@ function App() {
               className="space-y-6"
             >
               {/* ✅ Honeypot field to block spam bots */}
-              <input type="text" name="_gotcha" style={{ display: 'none' }} />
+              <input type="text" name="_gotcha" style={{ display: "none" }} />
 
               <div className="relative">
                 <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -483,7 +629,6 @@ function App() {
                 <Send className="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </button>
             </form>
-
           </div>
         </div>
       </section>
@@ -491,7 +636,7 @@ function App() {
       {/* Resume Download Section */}
       <section className="py-12 bg-[#34353a] border-t border-gray-700">
         <div className="container mx-auto px-4 text-center">
-          <a 
+          <a
             href="https://drive.google.com/file/d/1iDOf3bZ7U6An9AhIGVjfR9fFdqjNwtPe/view?usp=sharing"
             download
             className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-400 text-[#2a2d3a] rounded-lg hover:bg-cyan-500 transition-colors duration-300 font-semibold"
