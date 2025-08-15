@@ -106,22 +106,28 @@ function App() {
 
   const projects = [
     {
-      title: "Enterprise Kubernetes Cluster",
+      title: "Secure Static Site Deployment on AWS",
       description:
-        "Designed and implemented a highly available Kubernetes cluster on AWS EKS, supporting 100+ microservices with automated scaling and monitoring.",
-      tech: ["AWS EKS", "Terraform", "Prometheus", "Grafana"],
+        "Implemented a secure, serverless static website hosting solution on AWS using private S3, CloudFront with OAI, AWS WAF, CloudWatch Logs, and SNS notifications,ensuring content protection, monitoring, and alerting within Free Tier limits.",
+      tech: ["Amazon S3", "CloudFront", "WAF", "CloudWatch Logs", "SNS", "CloudWatch Alarm", "Cost Explorer", "Budgets"],
     },
     {
-      title: "CI/CD Pipeline Automation",
+      title: "Serverless Image Resizing & Watermarking on AWS",
       description:
-        "Built a comprehensive CI/CD pipeline using Jenkins and GitHub Actions, reducing deployment time by 70% and improving code quality through automated testing.",
-      tech: ["Jenkins", "GitHub Actions", "Docker", "SonarQube"],
+        "Developed a serverless image processing pipeline on AWS using S3, Lambda, DynamoDB, IAM, and CloudFront, enabling automatic image resizing, watermarking, metadata storage, and global content distribution.",
+      tech: ["S3", "IAM Role", "Lambda ", "CloudFront"],
     },
     {
-      title: "Cloud Cost Optimization",
+      title: "Docker-Based Developer Environment",
       description:
-        "Implemented AWS cost optimization strategies resulting in 40% reduction in cloud infrastructure costs while maintaining performance.",
-      tech: ["AWS", "Terraform", "CloudWatch", "Cost Explorer"],
+        "Built a cross-platform Docker-based development environment with VS Code integration, preloaded with Python, Node.js, Docker CLI, and Git, reducing setup time from 60 minutes to under 7 minutes (88% faster) and ensuring consistent, isolated workspaces across Windows, macOS, and Linux.",
+      tech: ["Ubuntu", "Python", "Node.js", "Git", "Docker CLI"],
+    },
+    {
+      title: "Redis-based OTP Verification System",
+      description:
+        "Developed a Dockerized OTP verification system using Python (Flask) and Redis, enabling generation of 6-digit OTPs with 5-minute expiry, secure verification, and automatic deletion, deployable via Docker Compose with a web interface for user interaction.",
+      tech: ["Flask", "Python", "Redis", "Git", "Docker", "HTML", "CSS", "JavaScript"],
     },
   ];
 
