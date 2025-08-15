@@ -219,7 +219,7 @@ function App() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="https://drive.google.com/file/d/1iDOf3bZ7U6An9AhIGVjfR9fFdqjNwtPe/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1-eVRg6fgBn1RTlBw5FQ7DRPZ05hWWu4I/view?usp=sharing"
                 download
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 text-cyan-400 hover:bg-cyan-400/20 transition-colors"
               >
